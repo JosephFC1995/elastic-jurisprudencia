@@ -4,7 +4,7 @@
 
 ## Instalación del Elasticsearch
 
-- Actualizamos el aptsudo apt update.
+- Actualizamos los paquetes de dependencias.
 
 ```
 sudo apt update
