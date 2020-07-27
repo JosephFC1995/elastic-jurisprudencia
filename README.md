@@ -1,41 +1,52 @@
-# Instalación de ElasticSearch y creación de generación de backups automáticos.
+# Instalación de ElasticSearch para servidores CentOS y creación de generación de backups automáticos.
 
  <josefc9512@gmail.com>
 
 ## Instalación del Elasticsearch
 
-- Actualizamos los paquetes de dependencias.
+- Como Elasticsearch depende de Java, debe instalarlo en su máquina antes de instalar Elasticsearch 6 en CentOS 7.
 
 ```
-sudo apt update
+sudo yum install java-openjdk-devel java-openjdk
 ```
 
-- Importamos el GPG Key de Elastic.
-
+- Instalamos el editor nano.
 ```
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-```
-
-- Agregamos el repositorio apt.
-
-```
-  sudo apt -y install apt-transport-https
-  echo "deb https://artifacts.elastic.co/packages/oss-6.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-6.x.list
+yum install nano
 ```
 
-- Instalamos OpenJDK
+- Agregamos el repositorio de Elasticsearch 6, primero creamos el archivo de elasticsearch en el repositorio de yum.
 
 ```
-sudo apt update
-sudo apt install apt-transport-https default-jdk default-jre
-
+sudo nano /etc/yum.repos.d/elasticsearch.repo
+[elasticsearch-6.x]
+name=Elasticsearch repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/oss-6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
 ```
 
-- Instalamos Elasticsearch y ejecutamos el apt.
+- El repositorio de Elasticsearch 6 está listo para usar. Puede instalar Elasticsearch usando el siguiente comando.
+
 ```
-sudo apt update
-sudo apt install elasticsearch-oss
+sudo yum install elasticsearch-oss
 ```
+
+-  Iniciamos y habilitamos el servicio de Elastic.
+
+```
+sudo systemctl enable --now elasticsearch
+```
+
+- Hagamos un test para verificar si todo esta bien.
+
+```
+curl -XGET 'http://localhost:9200/'
+```
+
 
 > Una vez instalado, es necesario colocar la ip del elastic al backend de jurisprudencia.
 > Asi como validar el estado del elastic con la siguiente URL https://jurisbackend.sedetc.gob.pe/api/admin/elastic/status enviando el token.
