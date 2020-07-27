@@ -23,6 +23,14 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
   echo "deb https://artifacts.elastic.co/packages/oss-6.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-6.x.list
 ```
 
+- Instalamos OpenJDK
+
+```
+sudo apt update
+sudo apt install apt-transport-https default-jdk default-jre
+
+```
+
 - Instalamos Elasticsearch y ejecutamos el apt.
 ```
 sudo apt update
