@@ -69,7 +69,7 @@ service elasticsearch restart
 - Ahora creamos el pipe atravez del administrador: ajustes/elastic, en el boton crear pipe
 
 
-# Instalación del script de backups automáticos.
+# Instalación del script de backups automáticos. <b>(Solo UBUNTU)</b>
 
 - Creamos las siguientes carpetas
 
